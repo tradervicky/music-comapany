@@ -1,53 +1,62 @@
 'use client'
+import { BackgroundBeams } from '@/components/ui/background-beams';
 import { BackgroundGradient } from '@/components/ui/background-gradient'
 import { Meteors } from '@/components/ui/meteors'
-import React from 'react'
+import React, { FormEvent, useState } from 'react';
+
 
 
 const page = () => {
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+  
+    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      console.log('Submitted:', { email, message });
+    };
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-black py-12 pt-36">
-        <Meteors number={100} />
-    <h1 className="text-4xl md:text-7xl text-center font-sans font-bold mb-8 text-white">Contact Us</h1>
-    <BackgroundGradient className="rounded-[22px] w-full min-w-lg overflow-hidden ">
-      <div className="bg-white dark:bg-zinc-900 p-8 rounded-[20px] shadow-lg w-[480px] relative">
-        <form className='w-full'>
-          <div className="mb-6">
-            <label className="block text-gray-700 dark:text-gray-300 mb-2" htmlFor="name">Name</label>
-            <input
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
-              type="text"
-              id="name"
-              placeholder="Your Name"
-            />
-          </div>
-          <div className="mb-6">
-            <label className="block text-gray-700 dark:text-gray-300 mb-2" htmlFor="email">Email</label>
-            <input
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
-              type="email"
-              id="email"
-              placeholder="Your Email"
-            />
-          </div>
-          <div className="mb-6">
-            <label className="block text-gray-700 dark:text-gray-300 mb-2" htmlFor="message">Message</label>
-            <textarea
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
-              id="message"
-              placeholder="Your Message"
-              rows={4}
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition duration-300"
-          >
-            Send Message
-          </button>
-        </form>
-      </div>
-    </BackgroundGradient>
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 py-12 pt-36 relative">
+    {' '}
+    {/* Ensure the container is relative */}
+    {/* BackgroundBeams with adjusted z-index */}
+    <BackgroundBeams className="absolute top-0 left-0 w-full h-full z-0" />
+    {/* Content with higher z-index */}
+    <div className="max-w-2xl mx-auto p-4 relative z-10">
+      {' '}
+      {/* Add relative and z-10 to bring content to the front */}
+      <h1 className="text-lg md:text-7xl text-center font-sans font-bold mb-8 text-white">
+        Contact Us
+      </h1>
+      <p className="text-neutral-500 max-w-lg mx-auto my-2 text-sm text-center">
+        We&apos;re here to help with any questions about our courses,
+        programs, or events. Reach out and let us know how we can assist you
+        in your musical journey.
+      </p>
+      <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Your email address"
+          className="rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500 w-full p-4 bg-neutral-950 placeholder:text-neutral-700"
+          required
+        />
+        <textarea
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Your message"
+          className="rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500 w-full p-4 bg-neutral-950 placeholder:text-neutral-700"
+          rows={5}
+          required
+        ></textarea>
+        <button
+          type="submit"
+          className="px-6 py-2 rounded-lg bg-teal-500 text-white font-medium hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+        >
+          Send Message
+        </button>
+      </form>
+    </div>
   </div>
   )
 }
