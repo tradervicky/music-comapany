@@ -1,7 +1,5 @@
 'use client'
 import { BackgroundBeams } from '@/components/ui/background-beams';
-import { BackgroundGradient } from '@/components/ui/background-gradient'
-import { Meteors } from '@/components/ui/meteors'
 import React, { FormEvent, useState } from 'react';
 
 
